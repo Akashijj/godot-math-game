@@ -1,10 +1,18 @@
 extends KinematicBody2D
 
-var health: int  = 2
+signal damage(amount)
+
+var health: int  = 1
 var challenge: int = 2*4
 var hitted: bool = false
 var velocity = Vector2(-100, 0)
+onready var timer := $Timer as Timer
+var start_timer = false
 
+
+func _ready() -> void:
+	if start_timer:
+		timer.start()
 
 func _on_Node2D_attack_enemie(answer) -> void:
 	if int(answer) == challenge:
@@ -36,3 +44,8 @@ func _set_animation() -> void:
 		velocity.x = -100
 	
 	$anim.play(anim)
+
+
+func _on_Timer_timeout() -> void:
+	if $ray_wall.is_colliding():
+		emit_signal("damage", 1)
