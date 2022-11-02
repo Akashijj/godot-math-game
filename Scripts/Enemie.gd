@@ -48,4 +48,4 @@ func _set_animation() -> void:
 
 func _on_Timer_timeout() -> void:
 	if $ray_wall.is_colliding():
-		emit_signal("damage", 1)
+		emit_signal("damage", 10)

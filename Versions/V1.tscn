@@ -1,11 +1,14 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Terrain/Terrain (16x16).png" type="Texture" id=3]
+[ext_resource path="res://Assets/Life Bar/lifebar_under.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Input.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Fonts/pixel_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Life Bar/lifebar_progress.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/LifeBar.gd" type="Script" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -627,6 +630,7 @@ format = 1
 tile_data = PoolIntArray( 327680, 14, 0, 327681, 15, 0, 327682, 16, 0, 393216, 17, 0, 393217, 24, 0, 393218, 18, 0, 458752, 17, 0, 458753, 25, 0, 458754, 18, 0, 524288, 17, 0, 524289, 23, 0, 524290, 18, 0, 589824, 19, 0, 589825, 20, 0, 589826, 21, 0, 655360, 13, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 720896, 6, 0, 720897, 7, 0, 720898, 7, 0, 720899, 7, 0, 720900, 7, 0, 720901, 7, 0, 720902, 7, 0, 720903, 7, 0, 720904, 7, 0, 720905, 7, 0, 720906, 7, 0, 720907, 7, 0, 720908, 7, 0, 720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 720912, 7, 0, 720913, 7, 0, 720914, 7, 0, 720915, 7, 0, 720916, 7, 0, 720917, 7, 0, 720918, 7, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -48, 8 )
 
 [node name="Enemie" parent="." instance=ExtResource( 2 )]
 
@@ -646,6 +650,16 @@ custom_fonts/font = ExtResource( 6 )
 custom_styles/focus = SubResource( 21 )
 max_length = 4
 script = ExtResource( 5 )
+
+[node name="LifeBar" type="TextureProgress" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 77.0
+margin_bottom = 16.0
+value = 50.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [connection signal="attack_enemie" from="." to="Enemie" method="_on_Node2D_attack_enemie"]
 [connection signal="damage" from="Enemie" to="Player" method="_on_Enemie_damage"]

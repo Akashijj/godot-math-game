@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Hit (32x32).png" type="Texture" id=1]
 [ext_resource path="res://Assets/Fonts/pixel_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Versions/Enemie.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Enemie.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Run (32x32).png" type="Texture" id=4]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" type="Texture" id=5]
 

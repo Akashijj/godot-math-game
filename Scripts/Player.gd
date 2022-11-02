@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var health = 5
+var health = 100
 
 # adiciona gravidade ao Player
 var velocity = Vector2.ZERO
