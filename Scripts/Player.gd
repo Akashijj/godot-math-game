@@ -13,10 +13,13 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Enemie_damage(amount) -> void:
-	if health > 1:
-		health -= amount
-		print("Took damage!")
-		print("Current life: ", health)
+	health -= amount
 	
-	else:
-		print("Died...")
+	if health == 0:
+		_gameOver()
+
+
+func _gameOver() -> void:
+	yield(get_tree().create_timer(0.4), "timeout")
+	queue_free()
+	get_tree().change_scene("res://Scenes/GameOver.tscn")
