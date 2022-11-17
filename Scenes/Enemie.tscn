@@ -169,22 +169,21 @@ tracks/2/keys = {
 extents = Vector2( 10, 12.5 )
 
 [node name="Enemie" type="KinematicBody2D"]
-position = Vector2( 80, 0 )
 collision_layer = 2
 collision_mask = 13
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 256.0
-margin_top = 112.0
-margin_right = 296.0
-margin_bottom = 128.0
+margin_left = -14.0
+margin_top = -36.0
+margin_right = 26.0
+margin_bottom = -20.0
 rect_scale = Vector2( 0.760002, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "2 x 4"
 
 [node name="texture" type="Sprite" parent="."]
-position = Vector2( 272, 144 )
+position = Vector2( 2, -4 )
 scale = Vector2( -1, 1 )
 texture = ExtResource( 5 )
 hframes = 11
@@ -197,11 +196,11 @@ anims/hit = SubResource( 23 )
 anims/run = SubResource( 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 272, 147.5 )
+position = Vector2( 2, -0.5 )
 shape = SubResource( 20 )
 
 [node name="ray_wall" type="RayCast2D" parent="."]
-position = Vector2( 272, 152 )
+position = Vector2( 2, 4 )
 enabled = true
 cast_to = Vector2( -16, 0 )
 collision_mask = 9

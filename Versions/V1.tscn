@@ -633,6 +633,7 @@ tile_data = PoolIntArray( 327680, 14, 0, 327681, 15, 0, 327682, 16, 0, 393216, 1
 position = Vector2( -48, 8 )
 
 [node name="Enemie" parent="." instance=ExtResource( 2 )]
+position = Vector2( 323, 146 )
 
 [node name="InputArea" type="PanelContainer" parent="."]
 modulate = Color( 0.984314, 0.690196, 0.278431, 1 )
@@ -661,7 +662,15 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 8 )
 script = ExtResource( 9 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="spawnpoint" type="Position2D" parent="."]
+position = Vector2( 332, 146 )
+
 [connection signal="attack_enemie" from="." to="Enemie" method="_on_Node2D_attack_enemie"]
 [connection signal="damage" from="Enemie" to="Player" method="_on_Enemie_damage"]
 [connection signal="text_entered" from="InputArea/input" to="." method="_on_input_text_entered"]
 [connection signal="text_entered" from="InputArea/input" to="InputArea/input" method="_on_input_text_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
