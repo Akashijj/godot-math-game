@@ -180,7 +180,6 @@ margin_right = 26.0
 margin_bottom = -20.0
 rect_scale = Vector2( 0.760002, 1 )
 custom_fonts/font = ExtResource( 2 )
-text = "2 x 4"
 
 [node name="texture" type="Sprite" parent="."]
 position = Vector2( 2, -4 )

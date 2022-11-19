@@ -12,29 +12,28 @@ var start_timer = false
 # Dinâmica de desafios
 # para cada inimigo gerado, um dos desafios deve ser atribuido a ele
 #############################
-var easy_challenges = {
-	"2 x 2": "4",
-	"5 - 1": "4",
-	"66 / 6": "11",
-	"1 + 1": "2"
-}
-
-var rng = RandomNumberGenerator.new()
-var n = rng.randomize()
-
-var my_random_number = rng.randf_range(0, easy_challenges.size())	
-
-var challenge = easy_challenges.keys()[my_random_number]
-var answer = easy_challenges.values()[my_random_number]
-
+var challenge := ""
+var answer := ""
 
 func _ready() -> void:
-	get_tree().root.get_node("Game").connect("attack_enemie", self, "_on_Game_attack_enemie")
-	get_node("Label").text = challenge
+	var game_node = get_tree().root.get_node("Game")
+	var enemy_handler_node = get_tree().root.get_node("Game").get_node("EnemyHandler")
 	
-	if start_timer:
-		timer.start()
+	game_node.connect("attack_enemie", self, "_on_Game_attack_enemie")
+	enemy_handler_node.connect("send_challange_and_answer", self, "_on_EnemyHandler_send_challange_and_answer")
 	
+	
+
+func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_answer):
+	if (get_node("Label").text.length() == 0): 
+		challenge = recieved_challenge
+		answer = recieved_answer
+		
+		get_node("Label").text = challenge
+		print("recebido: " + challenge)
+		
+		if start_timer:
+			timer.start() 
 
 
 func _on_Game_attack_enemie(input_answer) -> void:
