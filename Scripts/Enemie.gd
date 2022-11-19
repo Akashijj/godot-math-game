@@ -38,14 +38,21 @@ func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_ans
 func _on_Game_attack_enemie(input_answer) -> void:
 	if input_answer == answer:
 		print('Resposta correta')
-		# TODO: criar funcao _throw_arrow() que verifique a colisao da flecha
-		# com o inimigo e execute o codigo abaixo
+
+		_throw_dart()
 		hitted = true
 		health -= 1
 		yield(get_tree().create_timer(0.4), "timeout")
 		hitted = false
 		if health < 1:
 			queue_free()
+
+func _throw_dart():
+	var dart = preload("res://Scenes/Dart.tscn").instance()
+	
+	get_tree().root.get_node("Game").add_child(dart)
+	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
+	
 
 
 func _physics_process(delta: float) -> void:
