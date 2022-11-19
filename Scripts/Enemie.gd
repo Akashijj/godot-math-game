@@ -7,11 +7,6 @@ var hitted: bool = false
 var velocity = Vector2(-100, 0)
 onready var timer := $Timer as Timer
 var start_timer = false
-
-#############################
-# Dinâmica de desafios
-# para cada inimigo gerado, um dos desafios deve ser atribuido a ele
-#############################
 var challenge := ""
 var answer := ""
 
@@ -23,7 +18,11 @@ func _ready() -> void:
 	enemy_handler_node.connect("send_challange_and_answer", self, "_on_EnemyHandler_send_challange_and_answer")
 	
 	
-
+#############################
+# Dinâmica de desafios
+# para cada inimigo gerado, um dos desafios deve ser atribuido a ele
+# tanto o desafio, quanto a resposta sao recebidos do EnemyHandler
+#############################
 func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_answer):
 	if (get_node("Label").text.length() == 0): 
 		challenge = recieved_challenge

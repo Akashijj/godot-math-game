@@ -23,6 +23,14 @@ var easy_challenges = {
 var rng = RandomNumberGenerator.new()
 var n = rng.randomize()
 
+func defineRandomChallenge(challenges_collection) -> Array:
+	var my_random_number = rng.randf_range(0, challenges_collection.size())	
+
+	var challenge = challenges_collection.keys()[my_random_number]
+	var answer = challenges_collection.values()[my_random_number]
+	
+	return [challenge, answer]
+
 
 func newEnemy(typeOfEnemy):
 	count += 1
@@ -34,10 +42,9 @@ func newEnemy(typeOfEnemy):
 
 func _on_Timer_timeout():
 	if easy_challenges.size() != 0:
-		var my_random_number = rng.randf_range(0, easy_challenges.size())	
-
-		var challenge = easy_challenges.keys()[my_random_number]
-		var answer = easy_challenges.values()[my_random_number]		
+		var random_challenge = defineRandomChallenge(easy_challenges)
+		var challenge = random_challenge[0]
+		var answer = random_challenge[1]
 		
 		easy_challenges.erase(challenge)
 	
