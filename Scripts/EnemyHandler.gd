@@ -29,24 +29,22 @@ func newEnemy(typeOfEnemy):
 	var newEnemy = typeOfEnemy.instance()
 	newEnemy.name = 'enemy' + str(count)	
 	
-	var my_random_number = rng.randf_range(0, easy_challenges.size())	
-
-	var challenge = easy_challenges.keys()[my_random_number]
-	var answer = easy_challenges.values()[my_random_number]		
-		
-	emit_signal("send_challange_and_answer", challenge, answer)
-	self.add_child(newEnemy)
-	
-	easy_challenges.erase(challenge)
-	
+	self.add_child(newEnemy)	
 
 
 func _on_Timer_timeout():
 	if easy_challenges.size() != 0:
+		var my_random_number = rng.randf_range(0, easy_challenges.size())	
+
+		var challenge = easy_challenges.keys()[my_random_number]
+		var answer = easy_challenges.values()[my_random_number]		
 		
-		
+		easy_challenges.erase(challenge)
+	
 		emit_signal("child_entered_tree")
+		
 		newEnemy(easy_enemy)
+		emit_signal("send_challange_and_answer", challenge, answer)
 		for i in self.get_child_count():
 			var node = self.get_child(i)
 	
