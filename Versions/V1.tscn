@@ -672,4 +672,4 @@ script = ExtResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="EnemyHandler" method="_on_Timer_timeout"]
-[connection signal="child_entered_tree" from="EnemyHandler" to="Player" method="_on_Test_child_entered_tree"]
+[connection signal="child_entered_tree" from="EnemyHandler" to="Player" method="_on_EnemyHandler_child_entered_tree"]

@@ -27,5 +27,5 @@ func _gameOver() -> void:
 	queue_free()
 
 
-func _on_Test_child_entered_tree(node):
+func _on_EnemyHandler_child_entered_tree(node):
 	node.connect("damage", self, "_on_Enemie_damage")
