@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Enemie.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/pixel_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Main Characters/Ninja Frog/Hit (32x32).png" type="Texture" id=3]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Run (32x32).png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=20]
@@ -21,9 +22,75 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("texture:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "hit"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("texture:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 6, 6, 6, 6 ]
+}
 
 [sub_resource type="Animation" id=22]
 resource_name = "run"
+length = 1.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("texture:frame")
 tracks/0/interp = 1
@@ -35,6 +102,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("texture:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
 }
 
 [node name="Enemie 1" type="KinematicBody2D"]
@@ -65,7 +156,7 @@ wait_time = 1.5
 autostart = true
 
 [node name="texture" type="Sprite" parent="."]
-position = Vector2( 4, -3 )
+position = Vector2( 4, -2 )
 scale = Vector2( -1, 1 )
 z_index = -1
 texture = ExtResource( 4 )
@@ -74,6 +165,7 @@ hframes = 12
 [node name="anim" type="AnimationPlayer" parent="."]
 autoplay = "run"
 anims/RESET = SubResource( 21 )
+anims/hit = SubResource( 23 )
 anims/run = SubResource( 22 )
 
 [connection signal="damage" from="." to="." method="_on_Enemie_damage"]
