@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var health = 900
+var health = 100
 
 # adiciona gravidade ao Player
 var velocity = Vector2.ZERO
@@ -9,10 +9,10 @@ var gravity = 1200
 onready var node := $Game as Node2D
 
 
-
 func _physics_process(delta: float) -> void:
 	velocity.y += gravity * delta
 	move_and_slide(velocity)
+
 
 func _on_Enemie_damage(amount) -> void:
 	health -= amount

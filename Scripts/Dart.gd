@@ -16,7 +16,6 @@ func _physics_process(delta):
 		var gap = Vector2(destination - position)
 		move_and_slide(destination.normalized() * speed)
 		
-		
 		if $RayCast2D.is_colliding():
 			emit_signal("enemy_hitted")
 			queue_free()

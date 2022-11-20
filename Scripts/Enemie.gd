@@ -7,7 +7,7 @@ signal damage(amount)
 var health: int  = 1
 var hitted: bool = false
 var velocity = Vector2(-1, 0)
-var speed = 40
+var speed = 100
 onready var timer := $Timer as Timer
 var start_timer = false
 var challenge := ""
