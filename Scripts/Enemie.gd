@@ -1,11 +1,13 @@
 extends KinematicBody2D
 
 signal send_destination(destination)
+signal allow_shoot()
 signal damage(amount)
 
 var health: int  = 1
 var hitted: bool = false
-var velocity = Vector2(-100, 0)
+var velocity = Vector2(-1, 0)
+var speed = 100
 onready var timer := $Timer as Timer
 var start_timer = false
 var challenge := ""
@@ -40,18 +42,15 @@ func _on_Game_attack_enemie(input_answer) -> void:
 		_throw_dart()
 
 
-func new_dart():
-	var dart = preload("res://Scenes/Dart.tscn").instance()
-	
-	get_tree().root.get_node("Game").add_child(dart)
-	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
-	dart.connect("enemy_hitted", self, "_on_Dart_enemy_hitted")
-
 func _throw_dart():
 	var enemy_position = $".".global_position
+	var dart = preload("res://Scenes/Dart.tscn").instance()
+
+	dart.init(enemy_position)
+	get_tree().root.get_node("Game").add_child(dart)
+	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
 	
-	new_dart()
-	emit_signal("send_destination", enemy_position)
+	dart.connect("enemy_hitted", self, "_on_Dart_enemy_hitted")
 
 
 func _on_Dart_enemy_hitted():
@@ -62,8 +61,9 @@ func _on_Dart_enemy_hitted():
 	if health < 1:
 		queue_free()
 
+
 func _physics_process(delta: float) -> void:
-	velocity = move_and_slide(velocity)
+	move_and_slide(velocity.normalized() * speed)
 	
 	_set_animation()
 
