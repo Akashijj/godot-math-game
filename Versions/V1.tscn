@@ -668,8 +668,7 @@ position = Vector2( 333, 149 )
 script = ExtResource( 2 )
 
 [node name="DartPosition" type="Position2D" parent="."]
-visible = false
-position = Vector2( 52, 65 )
+position = Vector2( 28, 63 )
 
 [connection signal="text_entered" from="InputArea/input" to="." method="_on_input_text_entered"]
 [connection signal="text_entered" from="InputArea/input" to="InputArea/input" method="_on_input_text_entered"]
