@@ -1,14 +1,16 @@
 extends KinematicBody2D
 
 signal damage(amount)
+signal death(point)
 
 var health: int  = 1
 var hitted: bool = false
-var velocity = Vector2(-100, 0)
+var velocity = Vector2(-60, 0)
 onready var timer := $Timer as Timer
 var start_timer = false
 var challenge := ""
 var answer := ""
+var point = 0
 
 func _ready() -> void:
 	var game_node = get_tree().root.get_node("Game")
@@ -17,23 +19,22 @@ func _ready() -> void:
 	game_node.connect("attack_enemie", self, "_on_Game_attack_enemie")
 	enemy_handler_node.connect("send_challange_and_answer", self, "_on_EnemyHandler_send_challange_and_answer")
 	
-	
 #############################
 # Dinâmica de desafios
 # para cada inimigo gerado, um dos desafios deve ser atribuido a ele
 # tanto o desafio, quanto a resposta sao recebidos do EnemyHandler
 #############################
-func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_answer):
+func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_answer, receive_point):
 	if (get_node("Label").text.length() == 0): 
 		challenge = recieved_challenge
 		answer = recieved_answer
+		point = receive_point
 		
 		get_node("Label").text = challenge
 		print("recebido: " + challenge)
 		
 		if start_timer:
 			timer.start() 
-
 
 func _on_Game_attack_enemie(input_answer) -> void:
 	if input_answer == answer:
@@ -45,14 +46,14 @@ func _on_Game_attack_enemie(input_answer) -> void:
 		yield(get_tree().create_timer(0.4), "timeout")
 		hitted = false
 		if health < 1:
+			print(point)
+			emit_signal("death", point)
 			queue_free()
-
 
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity)
 	
 	_set_animation()
-
 
 func _set_animation() -> void:
 	var anim = 'run'
@@ -63,6 +64,10 @@ func _set_animation() -> void:
 	
 	else:
 		velocity.x = -100
+	
+	if $ray_wall.is_colliding():
+		velocity.x = 0
+		anim = 'attack'
 	
 	$anim.play(anim)
 

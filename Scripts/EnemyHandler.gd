@@ -1,7 +1,9 @@
 extends Node2D
 
-onready var easy_enemy = preload("res://Scenes/Enemie1.tscn")
-onready var medium_enemy = preload("res://Scenes/Enemie2.tscn")
+onready var slime = preload("res://Scenes/Enemie3.tscn")
+onready var chammeleon = preload("res://Scenes/Enemie2.tscn")
+onready var frog = preload("res://Scenes/Enemie1.tscn")
+
 var count = 0
 
 signal send_challange_and_answer(challenge, answer)
@@ -46,8 +48,8 @@ var levelChallenges = {
 	"21 / 3": "7"},
 	2 : {
 	"√9": "3",
-	"3**3": "27",
-	"12**2": "144",
+	"3^3": "27",
+	"12^2": "144",
 	"√16": "4",
 	"√25": "5"
 	}
@@ -69,7 +71,6 @@ func defineRandomChallenge(challenges_collection, level) -> Array:
 	
 	return [challenge, answer, randomLevel + 1]
 
-
 func newEnemy(typeOfEnemy):
 	count += 1
 	var newEnemy = typeOfEnemy.instance()
@@ -77,26 +78,24 @@ func newEnemy(typeOfEnemy):
 	
 	self.add_child(newEnemy)	
 
-
 func _on_Timer_timeout():
 		var random_challenge = defineRandomChallenge(levelChallenges, level)
 		var challenge = random_challenge[0]
 		var answer = random_challenge[1]
 		var levelEnemy = random_challenge[2]
 		
-		emit_signal("child_entered_tree")
+		if(levelEnemy == 3):
+			newEnemy(chammeleon)
+		elif (levelEnemy == 2):
+			newEnemy(frog)
+		else:
+			newEnemy(slime)
 		
-		if(levelEnemy == 1): 
-			newEnemy(easy_enemy)
-		else: 
-			newEnemy(medium_enemy)
+		emit_signal("send_challange_and_answer", challenge, answer, levelEnemy)
 		
-		emit_signal("send_challange_and_answer", challenge, answer)
-		
-		if(enemiesCreated == 15 && level < 2):
+		if(enemiesCreated == 1 && level < 3):
 			print("Level Changed")
 			level += 1
 			enemiesCreated = 0	
 		else: 
 			enemiesCreated += 1	
-			

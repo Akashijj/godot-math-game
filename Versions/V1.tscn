@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnemyHandler.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Life Bar/lifebar_progress.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/LifeBar.gd" type="Script" id=9]
+[ext_resource path="res://Versions/Score.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Background/back.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -619,25 +621,28 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="StyleBoxEmpty" id=21]
 
 [node name="Game" type="Node2D"]
+position = Vector2( -2, -112 )
+scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 7 )
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 0, 192 )
 tile_set = SubResource( 4 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( 327680, 14, 0, 327681, 15, 0, 327682, 16, 0, 393216, 17, 0, 393217, 24, 0, 393218, 18, 0, 458752, 17, 0, 458753, 25, 0, 458754, 18, 0, 524288, 17, 0, 524289, 23, 0, 524290, 18, 0, 589824, 19, 0, 589825, 20, 0, 589826, 21, 0, 655360, 13, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 720896, 6, 0, 720897, 7, 0, 720898, 7, 0, 720899, 7, 0, 720900, 7, 0, 720901, 7, 0, 720902, 7, 0, 720903, 7, 0, 720904, 7, 0, 720905, 7, 0, 720906, 7, 0, 720907, 7, 0, 720908, 7, 0, 720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 720912, 7, 0, 720913, 7, 0, 720914, 7, 0, 720915, 7, 0, 720916, 7, 0, 720917, 7, 0, 720918, 7, 0 )
+tile_data = PoolIntArray( 327680, 14, 0, 327681, 15, 0, 327682, 16, 0, 393216, 17, 0, 393217, 24, 0, 393218, 18, 0, 458752, 17, 0, 458753, 25, 0, 458754, 18, 0, 524288, 17, 0, 524289, 23, 0, 524290, 18, 0, 589824, 19, 0, 589825, 20, 0, 589826, 21, 0, 655360, 13, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 655383, 1, 0, 655384, 1, 0, 655385, 1, 0, 655386, 1, 0, 655387, 1, 0, 655388, 1, 0, 655389, 1, 0, 655390, 1, 0, 655391, 1, 0, 655392, 1, 0, 655393, 1, 0, 655394, 1, 0, 655395, 1, 0, 655396, 1, 0, 655397, 1, 0, 655398, 1, 0, 655399, 1, 0, 720896, 6, 0, 720897, 7, 0, 720898, 7, 0, 720899, 7, 0, 720900, 7, 0, 720901, 7, 0, 720902, 7, 0, 720903, 7, 0, 720904, 7, 0, 720905, 7, 0, 720906, 7, 0, 720907, 7, 0, 720908, 7, 0, 720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 720912, 7, 0, 720913, 7, 0, 720914, 7, 0, 720915, 7, 0, 720916, 7, 0, 720917, 7, 0, 720918, 7, 0, 720919, 7, 0, 720920, 7, 0, 720921, 7, 0, 720922, 7, 0, 720923, 7, 0, 720924, 7, 0, 720925, 7, 0, 720926, 7, 0, 720927, 7, 0, 720928, 7, 0, 720929, 7, 0, 720930, 7, 0, 720931, 7, 0, 720932, 7, 0, 720933, 7, 0, 720934, 7, 0, 720935, 7, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -48, 8 )
+position = Vector2( -52, 204 )
 
 [node name="InputArea" type="PanelContainer" parent="."]
 modulate = Color( 0.984314, 0.690196, 0.278431, 1 )
-margin_left = 232.0
-margin_top = 8.0
-margin_right = 316.0
-margin_bottom = 48.0
+margin_left = 315.0
+margin_top = 143.75
+margin_right = 399.0
+margin_bottom = 183.75
 
 [node name="input" type="LineEdit" parent="InputArea"]
 margin_left = 7.0
@@ -649,11 +654,18 @@ custom_styles/focus = SubResource( 21 )
 max_length = 4
 script = ExtResource( 5 )
 
+[node name="Back" type="Sprite" parent="InputArea"]
+position = Vector2( 0.325545, 80 )
+scale = Vector2( 0.698439, 0.5 )
+z_index = -1
+texture = ExtResource( 11 )
+
 [node name="LifeBar" type="TextureProgress" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 77.0
-margin_bottom = 16.0
+margin_left = 6.25
+margin_top = 145.0
+margin_right = 75.25
+margin_bottom = 153.0
+rect_scale = Vector2( 2, 2 )
 value = 10.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 8 )
@@ -664,8 +676,19 @@ wait_time = 2.0
 autostart = true
 
 [node name="EnemyHandler" type="Node2D" parent="."]
-position = Vector2( 333, 149 )
+position = Vector2( 602, 338 )
 script = ExtResource( 2 )
+
+[node name="Score" type="Label" parent="."]
+margin_left = 13.75
+margin_top = 221.25
+margin_right = 53.75
+margin_bottom = 235.25
+custom_colors/font_color = Color( 0.662745, 0.815686, 0.941176, 1 )
+custom_colors/font_outline_modulate = Color( 0.956863, 0.203922, 0.388235, 1 )
+custom_fonts/font = ExtResource( 6 )
+align = 1
+script = ExtResource( 10 )
 
 [connection signal="text_entered" from="InputArea/input" to="." method="_on_input_text_entered"]
 [connection signal="text_entered" from="InputArea/input" to="InputArea/input" method="_on_input_text_entered"]
@@ -673,3 +696,4 @@ script = ExtResource( 2 )
 [connection signal="timeout" from="Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="EnemyHandler" method="_on_Timer_timeout"]
 [connection signal="child_entered_tree" from="EnemyHandler" to="Player" method="_on_EnemyHandler_child_entered_tree"]
+[connection signal="child_entered_tree" from="EnemyHandler" to="Score" method="_on_EnemyHandler_child_entered_tree"]
