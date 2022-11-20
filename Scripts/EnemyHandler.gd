@@ -27,13 +27,13 @@ var levelChallenges = {
 	"7 + 4": "11",
 	"80 + 9": "89",
 	"13 + 7": "20",
-	"9 - 2": "7",
+	"9 - 4": "5",
 	"14 - 1": "13",
-	"13 - 1": "12",
+	"13 + 1": "14",
 	"10 - 9": "1",
-	"10 - 3": "7",
+	"10 - 7": "3",
 	"8 - 2": "6",
-	"90 - 1": "89",
+	"90 - 2": "88",
 	"87 - 3": "84"},
 	1 : {
 	"3 x 18": "54",
@@ -74,8 +74,8 @@ func defineRandomChallenge(challenges_collection, level) -> Array:
 func newEnemy(typeOfEnemy):
 	count += 1
 	var newEnemy = typeOfEnemy.instance()
-	newEnemy.name = 'enemy' + str(count)	
-	
+	newEnemy.name = 'enemy'
+
 	self.add_child(newEnemy)	
 
 func _on_Timer_timeout():
