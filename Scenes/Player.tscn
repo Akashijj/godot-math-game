@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Characters/Mask Dude/Idle (32x32).png" type="Texture" id=2]
+[ext_resource path="res://Assets/Items/Weapons/cajado2.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -46,6 +47,11 @@ script = ExtResource( 1 )
 position = Vector2( 84, 53 )
 texture = ExtResource( 2 )
 hframes = 11
+
+[node name="staff" type="Sprite" parent="texture"]
+position = Vector2( -10, 7 )
+scale = Vector2( 0.669787, 1.13475 )
+texture = ExtResource( 3 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

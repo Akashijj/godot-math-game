@@ -1,10 +1,13 @@
 extends KinematicBody2D
 
+signal send_destination(destination)
+signal allow_shoot()
 signal damage(amount)
 
 var health: int  = 1
 var hitted: bool = false
-var velocity = Vector2(-100, 0)
+var velocity = Vector2(-1, 0)
+var speed = 100
 onready var timer := $Timer as Timer
 var start_timer = false
 var challenge := ""
@@ -29,7 +32,6 @@ func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_ans
 		answer = recieved_answer
 		
 		get_node("Label").text = challenge
-		print("recebido: " + challenge)
 		
 		if start_timer:
 			timer.start() 
@@ -37,19 +39,31 @@ func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_ans
 
 func _on_Game_attack_enemie(input_answer) -> void:
 	if input_answer == answer:
-		print('Resposta correta')
-		# TODO: criar funcao _throw_arrow() que verifique a colisao da flecha
-		# com o inimigo e execute o codigo abaixo
-		hitted = true
-		health -= 1
-		yield(get_tree().create_timer(0.4), "timeout")
-		hitted = false
-		if health < 1:
-			queue_free()
+		_throw_dart()
+
+
+func _throw_dart():
+	var enemy_position = $".".global_position
+	var dart = preload("res://Scenes/Dart.tscn").instance()
+
+	dart.init(enemy_position)
+	get_tree().root.get_node("Game").add_child(dart)
+	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
+	
+	dart.connect("enemy_hitted", self, "_on_Dart_enemy_hitted")
+
+
+func _on_Dart_enemy_hitted():
+	hitted = true
+	health -= 1
+	yield(get_tree().create_timer(0.4), "timeout")
+	hitted = false
+	if health < 1:
+		queue_free()
 
 
 func _physics_process(delta: float) -> void:
-	velocity = move_and_slide(velocity)
+	move_and_slide(velocity.normalized() * speed)
 	
 	_set_animation()
 

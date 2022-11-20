@@ -667,9 +667,13 @@ autostart = true
 position = Vector2( 333, 149 )
 script = ExtResource( 2 )
 
+[node name="DartPosition" type="Position2D" parent="."]
+position = Vector2( 28, 63 )
+
 [connection signal="text_entered" from="InputArea/input" to="." method="_on_input_text_entered"]
 [connection signal="text_entered" from="InputArea/input" to="InputArea/input" method="_on_input_text_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="EnemyHandler" method="_on_Timer_timeout"]
+[connection signal="child_entered_tree" from="EnemyHandler" to="." method="_on_EnemyHandler_child_entered_tree"]
 [connection signal="child_entered_tree" from="EnemyHandler" to="Player" method="_on_EnemyHandler_child_entered_tree"]
