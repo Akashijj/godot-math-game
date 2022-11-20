@@ -74,7 +74,7 @@ func newEnemy(typeOfEnemy):
 	count += 1
 	var newEnemy = typeOfEnemy.instance()
 	newEnemy.name = 'enemy' + str(count)	
-	
+
 	self.add_child(newEnemy)	
 
 

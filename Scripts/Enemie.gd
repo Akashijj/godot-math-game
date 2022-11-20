@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+signal send_destination(destination)
 signal damage(amount)
 
 var health: int  = 1
@@ -29,7 +30,6 @@ func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_ans
 		answer = recieved_answer
 		
 		get_node("Label").text = challenge
-		print("recebido: " + challenge)
 		
 		if start_timer:
 			timer.start() 
@@ -37,23 +37,30 @@ func _on_EnemyHandler_send_challange_and_answer(recieved_challenge, recieved_ans
 
 func _on_Game_attack_enemie(input_answer) -> void:
 	if input_answer == answer:
-		print('Resposta correta')
-
 		_throw_dart()
-		hitted = true
-		health -= 1
-		yield(get_tree().create_timer(0.4), "timeout")
-		hitted = false
-		if health < 1:
-			queue_free()
 
-func _throw_dart():
+
+func new_dart():
 	var dart = preload("res://Scenes/Dart.tscn").instance()
 	
 	get_tree().root.get_node("Game").add_child(dart)
 	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
-	
+	dart.connect("enemy_hitted", self, "_on_Dart_enemy_hitted")
 
+func _throw_dart():
+	var enemy_position = $".".global_position
+	
+	new_dart()
+	emit_signal("send_destination", enemy_position)
+
+
+func _on_Dart_enemy_hitted():
+	hitted = true
+	health -= 1
+	yield(get_tree().create_timer(0.4), "timeout")
+	hitted = false
+	if health < 1:
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity)
