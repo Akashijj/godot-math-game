@@ -43,17 +43,15 @@ func _on_Game_attack_enemie(input_answer) -> void:
 	if input_answer == answer:
 		_throw_dart()
 
-
 func _throw_dart():
 	var enemy_position = $".".global_position
 	var dart = preload("res://Scenes/Dart.tscn").instance()
 
 	dart.init(enemy_position)
 	get_tree().root.get_node("Game").add_child(dart)
-	dart.position = get_tree().root.get_node("Game").get_node("DartPosition").global_position
+	dart.position = Vector2(23.75, 250.25)
 	
 	dart.connect("enemy_hitted", self, "_on_Dart_enemy_hitted")
-
 
 func _on_Dart_enemy_hitted():
 	hitted = true
@@ -81,10 +79,12 @@ func _set_animation() -> void:
 	if $ray_wall.is_colliding():
 		velocity.x = 0
 		anim = 'attack'
+		if hitted:
+			anim = 'hit'
+			velocity.x = 0
 	
 	$anim.play(anim)
 
 func _on_Timer_timeout() -> void:
 	if $ray_wall.is_colliding():	
 		emit_signal("damage", 10)
-
