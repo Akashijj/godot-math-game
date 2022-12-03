@@ -9,7 +9,7 @@ var health: int  = 1
 var hitted: bool = false
 
 var velocity = Vector2(-1, 0)
-var speed = 100
+var speed = 50
 onready var timer := $Timer as Timer
 var start_timer = false
 var challenge := ""
